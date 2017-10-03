@@ -2,21 +2,14 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     use Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $table = 'users';
 
     /**
      * The attributes that should be hidden for arrays.
@@ -26,4 +19,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function($content){
+            $registrations = $content->registrations;
+            foreach($registrations as $registration){
+                $registration->delete();
+            }
+        });
+    }
+
+    public function registrations(){
+        return $this->hasMany('App\Registration', 'user_id', 'id');
+    }
 }

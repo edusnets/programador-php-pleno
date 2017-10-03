@@ -11,7 +11,6 @@ Deve-se criar uma aplicação em PHP para resolver o problema descrito abaixo, u
 # Cenário fictício
 Prof. Jubilut está lançando uma nova plataforma de ensino online. Nesta plataforma, desejamos realizar a matrícula de alunos em cursos através de um painel administrativo. 
 
-
 # Requisitos
 - Um aluno pode ser matriculado em mais de um curso
 - O administrador do sistema que realizará as matrículas. Não é necessário desenvolver tela para alunos.
