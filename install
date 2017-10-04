@@ -1,0 +1,16 @@
+#!/bin/bash
+# Backend
+
+cd backend
+# composer install
+# php artisan key:generate
+# php artisan migrate
+# php artisan db:seed
+# chmod -R 777 storage
+# chmod -R 777 bootstrap
+
+# Frontend
+# http-server -a localhost -p 8000 -c-1 ./app
+cd ..
+cd frontend
+bower install

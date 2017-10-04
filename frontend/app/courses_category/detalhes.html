@@ -1,0 +1,56 @@
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title">Detalhes da categoria: {{ courseCategoryFormTitle }} </h3>
+					<a class="btn btn-danger btn-xs pull-right" data-toggle="modal" data-target="#DeleteModal" style="margin-left:10px;">Excluir <i class="ion ion-android-cancel"></i></a>
+					<a href="/#!/courses-category" class="btn btn-success btn-xs pull-right"><i class="ion ion-chevron-left"></i> Voltar</a>
+				</div>
+				<div class="box-body">
+					<form role="form">
+						<div class="box-body">
+							<div class="form-group">
+								<label for="title">Título (*)</label>
+								<input type="text" class="form-control" id="title" placeholder="Título da categoria" ng-model="course_category.title" required>
+							</div>
+							<div class="form-group">
+								<label for="icon">Ícone</label>
+								<input type="text" class="form-control" id="icon" placeholder="Ícone" ng-model="course_category.icon" required>
+								<p class="help-block"><small>Consulte a lista de ícones no site <a href="http://ionicons.com/" target="_blank">Ionicons</a>.</small></p>
+							</div>
+						</div>
+
+						<div class="box-footer">
+							<button type="submit" class="btn btn-primary" ng-click="saveForm()">Salvar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="DeleteModalLabel">Excluir Categoria do Curso</h4>
+			</div>
+			<div class="modal-body">
+				<span ng-if="course_category.courses.length == 0">Tem certeza que deseja excluir esta categoria?<br> Essa operação não poderá ser desfeita.<br/><br/></span>
+				<div ng-if="course_category.courses.length > 0" class="callout callout-danger">
+					<h4>ATENÇÃO!</h4>
+
+					<p>Esta categoria tem {{ course_category.courses.length }} curso(s) cadastrado(s).<br/>Altere a categoria desses cursos antes.</p>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" ng-click="deleteCourse();" class="btn btn-danger pull-left" ng-if="course_category.courses.length == 0">Sim, desejo excluir!</button>
+				<button type="button" class="btn btn-primary pull-right" data-dismiss="modal">Não, quero desistir!</button>
+			</div>
+		</div>
+	</div>
+</div>

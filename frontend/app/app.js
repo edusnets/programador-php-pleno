@@ -6,6 +6,7 @@ angular.module('myApp', [
 	'myApp.dashboard',
 	'myApp.users',
 	'myApp.courses',
+	'myApp.courses_category',
 	'myApp.registrations',
 	'myApp.version',
 	'ngMinimalGrid',

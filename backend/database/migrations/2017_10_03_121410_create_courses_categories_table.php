@@ -17,7 +17,7 @@ class CreateCoursesCategoriesTable extends Migration
         Schema::create('courses_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title', 128);
-            $table->string('icon', 56);
+            $table->string('icon', 56)->nullable();
             $table->timestamps();
         });
     }

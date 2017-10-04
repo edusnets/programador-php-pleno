@@ -16,15 +16,22 @@ class CourseCategorySeeder extends Seeder
 			[
 				'title' => 'Biologia',
 				'icon' 	=> 'ion-leaf',
-			],
+			]
+		);
+		
+		DB::table('courses_categories')->insert(
 			[
 				'title' => 'Física',
 				'icon' 	=> 'ion-nuclear',
-			],
+			]
+		);
+		
+		DB::table('courses_categories')->insert(
 			[
 				'title' => 'Química',
 				'icon' 	=> 'ion-erlenmeyer-flask',
 			]
 		);
+
 	}
 }
