@@ -5,12 +5,14 @@ angular.module('myApp', [
 	'ngRoute',
 	'myApp.dashboard',
 	'myApp.users',
-	'myApp.view1',
-	'myApp.view2',
+	'myApp.courses',
+	'myApp.registrations',
 	'myApp.version',
 	'ngMinimalGrid',
 	'ui.dateTimeInput',
-	'ngNotify'
+	'ngNotify',
+	'ngSanitize',
+	'ui.select'
 ]).
 config([
 	'$locationProvider',
@@ -22,7 +24,7 @@ config([
 		minimalGridConfigProvider
 	) {
 		moment.locale('pt-br');
-		
+
 		$locationProvider.hashPrefix('!');
 
 		$routeProvider.otherwise({redirectTo: '/dashboard'});

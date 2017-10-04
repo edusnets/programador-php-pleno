@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\RegistrationController;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -94,10 +95,23 @@ class UserController extends Controller
 			], 422);
 		}
 
+		$registrations 			= $user->registrations;
+		$registrationsReturn 	= null;
+
+		if(!empty($registrations)){
+			$registrationController = new RegistrationController;
+			foreach($registrations as $reg){
+				$registrationsReturn[] = $registrationController->createRegistrationObject($reg);
+			}
+		}
+
 		return response()->json([
 			'success'   => true,
 			'message'   => null,
-			'data'      => $user->toArray() 
+			'data'      => [
+				'user' => $user->toArray(),
+				'registrations' => $registrationsReturn
+			]
 		], 200);
 	}
 

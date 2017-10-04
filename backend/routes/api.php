@@ -15,4 +15,6 @@ use Illuminate\Http\Request;
 
 Route::resource('user', 'UserController');	
 Route::resource('course', 'CourseController');	
+Route::resource('registration', 'RegistrationController');	
 Route::get('dashboard', 'DashboardController@summary');
+Route::get('categories', 'CourseController@getCategories');

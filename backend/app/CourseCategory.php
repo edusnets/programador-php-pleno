@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class CourseCategory extends Model
 {
     //
+    protected $table = 'courses_categories';
 }

@@ -15,6 +15,7 @@
   	<link rel="stylesheet" href="bower_components/angular-minimal-grid/dist/minimal-grid.min.css">      
   	<link rel="stylesheet" href="bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css">      
   	<link rel="stylesheet" href="bower_components/ng-notify/dist/ng-notify.min.css">      
+  	<link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.min.css">      
 
 	<link rel="stylesheet" href="assets/css/AdminLTE.min.css">
 	<link rel="stylesheet" href="assets/css/_all-skins.min.css">
@@ -23,28 +24,21 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	<header class="main-header">
-		<!-- Logo -->
 		<a href="/" class="logo">
-			<!-- mini logo for sidebar mini 50x50 pixels -->
 			<span class="logo-mini"><b>B</b>T</span>
-			<!-- logo for regular state and mobile devices -->
 			<span class="logo-lg"><b>Admin</b>LTE</span>
 		</a>
-		<!-- Header Navbar: style can be found in header.less -->
 		<nav class="navbar navbar-static-top">
-			<!-- Sidebar toggle button-->
 			<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
 				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</a>
-
 		</nav>
 	</header>
 
 	<aside class="main-sidebar">
-		<!-- sidebar: style can be found in sidebar.less -->
 		<section class="sidebar">
 			<ul class="sidebar-menu" data-widget="tree">
 				<li class="header">MENU ADMINISTRATIVO</li>
@@ -70,19 +64,24 @@
 						</span>
 					</a>
 					<ul class="treeview-menu">
-						<li><a href="#"><i class="fa fa-circle-o"></i> Cadastrar novo</a></li>
-						<li><a href="#"><i class="fa fa-circle-o"></i> Ver todos</a></li>
+						<li><a href="/#!/courses/create"><i class="fa fa-circle-o"></i> Cadastrar novo</a></li>
+						<li><a href="/#!/courses"><i class="fa fa-circle-o"></i> Ver todos</a></li>
 					</ul>
 				</li>
 
-				<li>
+				<li class="treeview">
 					<a href="#">
 						<i class="fa fa-edit"></i> <span>Matrículas</span>
+						<span class="pull-right-container">
+							<i class="fa fa-angle-left pull-right"></i>
+						</span>
 					</a>
+					<ul class="treeview-menu">
+						<li><a href="/#!/registrations"><i class="fa fa-circle-o"></i> Ver todas</a></li>
+					</ul>
 				</li>
 			</ul>
 		</section>
-		<!-- /.sidebar -->
 	</aside>
 
 	<div class="content-wrapper">
@@ -110,6 +109,8 @@
 	<script src="bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js" type="text/javascript"></script>
 	<script src="bower_components/angular-date-time-input/src/dateTimeInput.js"></script>
 	<script src="bower_components/ng-notify/dist/ng-notify.min.js"></script>
+	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+	<script src="bower_components/angular-ui-select/dist/select.min.js"></script>
 	
 	<script src="assets/js/adminlte.min.js"></script>
 	<script src="assets/js/demo.js"></script>
@@ -119,8 +120,8 @@
 
 	<script src="dashboard/controller.js"></script>
 	<script src="users/controller.js"></script>
-	<script src="view1/view1.js"></script>
-	<script src="view2/view2.js"></script>
+	<script src="courses/controller.js"></script>
+	<script src="registrations/controller.js"></script>
 
 	<script src="components/version/version.js"></script>
 	<script src="components/version/version-directive.js"></script>

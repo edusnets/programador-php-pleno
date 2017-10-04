@@ -82,8 +82,9 @@ angular.module(
 		var id = parseInt($routeParams.id);
 
 		$http.get(__env.apiUrl + 'user/' + id).then(function (resp) {
-			$scope.user = resp.data.data;
-			$scope.userFormTitle = resp.data.data.name;
+			$scope.user 			= resp.data.data.user;
+			$scope.registrations	= resp.data.data.registrations;
+			$scope.userFormTitle 	= resp.data.data.user.name;
 		}, function (err) {
 			ngNotify.set(err.data.data.join(' | '), 'error');
 		});

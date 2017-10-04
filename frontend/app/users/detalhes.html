@@ -12,15 +12,15 @@
 					<form role="form">
 						<div class="box-body">
 							<div class="form-group">
-								<label for="name">Nome</label>
+								<label for="name">Nome (*)</label>
 								<input type="text" class="form-control" id="name" placeholder="Nome do aluno" value="{{ user.name }}" ng-model="user.name" required>
 							</div>
 							<div class="form-group">
-								<label for="email">E-mail</label>
+								<label for="email">E-mail (*)</label>
 								<input type="email" class="form-control" id="email" placeholder="Email do aluno" value="{{ user.email }}" required disabled>
 							</div>
 							<div class="form-group">
-								<label for="birthdate">Data de Nascimento</label>
+								<label for="birthdate">Data de Nascimento (*)</label>
 								
 								<div class="dropdown">
 									<a class="dropdown-toggle" id="dropdown" role="button" data-toggle="dropdown" data-target=".dropdown">
@@ -50,11 +50,21 @@
 		<div class="col-md-4">
 			<div class="box">
 				<div class="box-header with-border">
-					<h3 class="box-title">Cursos Matriculados (0)</h3>
+					<h3 class="box-title">Cursos Matriculados ({{ registrations.length ? registrations.length : 0 }})</h3>
 				</div>
 
 				<div class="box-body">
-					
+					<div class="info-box registrationInUserBox" ng-repeat="(key, value) in registrations">
+						<span class="info-box-icon bg-aqua">
+							<i class="ion {{ value.course.category.icon }}"></i>
+						</span>
+						<div class="info-box-content">
+							<small class="pull-right">{{ value.course.category.title }}</small>
+							<span class="info-box-number">{{ value.course.title }}</span>
+							<a class="pull-right btn btn-primary btn-xs" ng-href="/#!/registrations/details/{{ value.id }}">Ver matrícula</a>
+							<span class="info-box-text">{{ value.date }}</span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

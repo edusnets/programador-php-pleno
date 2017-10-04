@@ -1,0 +1,20 @@
+<section class="content">
+	<div class="box">
+		<div class="box-header with-border">
+			<h3 class="box-title">Matrículas ({{ rows.length }})</h3>
+			<a href="/#!/registrations/create" class="btn btn-primary btn-xs pull-right"><i class="ion ion-plus"></i> Cadastrar</a>
+		</div>
+		<div class="box-body">
+			<div class="row">
+				<div class="col-md-12">
+					<input type="text" ng-model="search" class="form-control" placeholder="Pesquise por qualquer campo">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<minimal-grid columns="fields" rows="rows" pagination-max="10"></minimal-grid>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\CourseCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class CourseController extends Controller
@@ -16,12 +18,28 @@ class CourseController extends Controller
 	public function index()
 	{
 		//
-		$courses = Course::all();
+		$courses 		= Course::all();
+		$categories		= CourseCategory::all();
+
+		$coursesReturn 	= null;
+
+		foreach($courses as $course){
+			$coursesReturn[] = [
+				'id' => $course->id,
+				'title' => $course->title,
+				'description' => $course->description,
+				'category_id' => $course->category_id,
+				'category_name' => isset($course->category) ? $course->category->title : null
+			];
+		}
 
 		return response()->json([
 			'success'   => true,
 			'message'   => null,
-			'data'      => $courses->toArray() 
+			'data'      => [
+				'courses' 		=> $coursesReturn,
+				'categories' 	=> $categories->toArray()
+			]
 		], 200);
 	}
 
@@ -37,6 +55,7 @@ class CourseController extends Controller
 		$rules = [
 			'title'         => 'required|max:128',
 			'description'   => 'required|max:256',
+			'category_id'   => 'exists:courses_categories,id'
 		];
 
 		$messages = [
@@ -44,6 +63,7 @@ class CourseController extends Controller
 			'title.max'   			=> 'O título pode ter no máximo 128 letras',
 			'description.required'	=> 'O campo descrição é de preenchimento obrigatório',
 			'description.max'		=> 'A descrição pode ter no máximo 256 letras',
+			'category_id.exists'	=> 'Selecione uma categoria válida',
 		];
 
 		$validator = Validator::make($request->all(), $rules, $messages);
@@ -59,6 +79,7 @@ class CourseController extends Controller
 		$course = new Course;
 		$course->title 			= $request->input('title');
 		$course->description 	= $request->input('description');
+		$course->category_id 	= $request->input('category_id');
 		$course->save();
 
 		return response()->json([
@@ -77,7 +98,8 @@ class CourseController extends Controller
 	public function show($id)
 	{
 		//
-		$course = Course::find($id);
+		$course 		= Course::find($id);
+		$categories		= CourseCategory::all();
 
 		if(empty($course)){
 			return response()->json([
@@ -90,7 +112,10 @@ class CourseController extends Controller
 		return response()->json([
 			'success'   => true,
 			'message'   => null,
-			'data'      => $course->toArray() 
+			'data'      => [
+				'course' 		=> $course->toArray(),
+				'categories' 	=> $categories->toArray()
+			]
 		], 200);
 	}
 
@@ -115,8 +140,9 @@ class CourseController extends Controller
 		}
 
 		$rules = [
-			'title'         => 'required|max:128',
-			'description'   => 'required|max:256',
+			'title'         	=> 'required|max:128',
+			'description'   	=> 'required|max:256',
+			'category_id'   	=> 'exists:courses_categories,id'
 		];
 
 		$messages = [
@@ -124,6 +150,7 @@ class CourseController extends Controller
 			'title.max'   			=> 'O título pode ter no máximo 128 letras',
 			'description.required'	=> 'O campo descrição é de preenchimento obrigatório',
 			'description.max'		=> 'A descrição pode ter no máximo 256 letras',
+			'category_id.exists'	=> 'Selecione uma categoria válida',
 		];
 
 		$validator = Validator::make($request->all(), $rules, $messages);
@@ -138,6 +165,7 @@ class CourseController extends Controller
 
 		$course->title 			= $request->input('title');
 		$course->description	= $request->input('description');
+		$course->category_id	= $request->input('category_id');
 		$course->save();
 
 		return response()->json([
@@ -172,6 +200,17 @@ class CourseController extends Controller
 			'success'   => true,
 			'response'  => null,
 			'data'      => 'Curso excluído com sucesso'
+		], 200);
+	}
+
+	public function getCategories()
+	{
+		$categories		= CourseCategory::all();
+
+		return response()->json([
+			'success'   => true,
+			'message'   => null,
+			'data'      => $categories->toArray()
 		], 200);
 	}
 }

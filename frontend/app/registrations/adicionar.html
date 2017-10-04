@@ -1,0 +1,56 @@
+<!-- Main content -->
+<section class="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title">Criar uma nova matrícula</h3>
+					<a href="/#!/registrations" class="btn btn-success btn-xs pull-right"><i class="ion ion-chevron-left"></i> Voltar</a>
+				</div>
+				<div class="box-body">
+					<form role="form">
+						<div class="box-body">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="category">Aluno (*)</label>
+
+									<ui-select ng-model="registration.user_id">
+										<ui-select-match>
+											<span ng-bind="$select.selected.name"></span>
+										</ui-select-match>
+
+										<ui-select-choices repeat="user in (users | filter: $select.search) track by user.id">
+											<span ng-bind="user.name + ' <' + user.email + '>'"></span>
+										</ui-select-choices>
+									</ui-select>
+
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="category">Curso (*)</label>
+
+									<ui-select ng-model="registration.course_id">
+										<ui-select-match>
+											<span ng-bind="$select.selected.title"></span>
+										</ui-select-match>
+
+										<ui-select-choices repeat="course in (courses | filter: $select.search) track by course.id">
+											<span ng-bind="course.title + ' (' + course.category_name + ')'"></span>
+										</ui-select-choices>
+									</ui-select>
+
+								</div>
+							</div>
+						</div>
+
+						<div class="box-footer">
+							<button type="submit" class="btn btn-primary pull-right" ng-click="saveForm()">Criar Matrícula</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</section>
