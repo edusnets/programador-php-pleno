@@ -18,7 +18,7 @@ class RegistrationController extends Controller
 	{
 		//
 		$registrations 		= Registration::all();
-		$registrationReturn = null;
+		$registrationReturn = [];
 
 		foreach($registrations as $reg){
 			$registrationReturn[] = $this->createRegistrationObject($reg);

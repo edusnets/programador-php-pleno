@@ -21,7 +21,7 @@ class CourseController extends Controller
 		$courses 		= Course::all();
 		$categories		= CourseCategory::all();
 
-		$coursesReturn 	= null;
+		$coursesReturn 	= [];
 
 		foreach($courses as $course){
 			$coursesReturn[] = [
@@ -114,7 +114,8 @@ class CourseController extends Controller
 			'message'   => null,
 			'data'      => [
 				'course' 		=> $course->toArray(),
-				'categories' 	=> $categories->toArray()
+				'categories' 	=> $categories->toArray(),
+				'registrations'	=> $course->registrations->count()
 			]
 		], 200);
 	}

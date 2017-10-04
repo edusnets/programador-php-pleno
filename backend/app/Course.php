@@ -12,4 +12,8 @@ class Course extends Model
 	public function category(){
 		return $this->hasOne('App\CourseCategory', 'id', 'category_id');
 	}
+
+	public function registrations(){
+		return $this->hasMany('App\Registration', 'id', 'course_id');
+	}
 }

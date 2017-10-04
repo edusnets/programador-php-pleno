@@ -132,6 +132,8 @@ angular.module(
 		}
 		
 		$scope.saveForm = function(){
+			$scope.user.birthdate = moment($scope.user.birthdate).format('YYYY-MM-DD');
+			
 			$http.post(__env.apiUrl + 'user', $scope.user).then(function (resp) {
 				ngNotify.set('O usuário foi cadastrado com sucesso!', 'success');
 

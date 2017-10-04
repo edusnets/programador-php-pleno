@@ -22,7 +22,7 @@ class UserController extends Controller
 
 		return response()->json([
 			'success'   => true,
-			'message'   => null,
+			'response'  => null,
 			'data'      => $users->toArray() 
 		], 200);
 	}
@@ -107,7 +107,7 @@ class UserController extends Controller
 
 		return response()->json([
 			'success'   => true,
-			'message'   => null,
+			'response'   => null,
 			'data'      => [
 				'user' => $user->toArray(),
 				'registrations' => $registrationsReturn

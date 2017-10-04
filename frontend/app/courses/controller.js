@@ -85,7 +85,7 @@ angular.module(
 			$scope.courseFormTitle 		= resp.data.data.course.title;
 			$scope.courseCategories 	= resp.data.data.categories;
 
-			console.log($scope.course);
+			$scope.registrations 		= resp.data.data.registrations;
 
 		}, function (err) {
 			ngNotify.set(err.data.data.join(' | '), 'error');

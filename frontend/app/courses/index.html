@@ -1,7 +1,7 @@
 <section class="content">
 	<div class="box">
 		<div class="box-header with-border">
-			<h3 class="box-title">Cursos ({{ rows.length }})</h3>
+			<h3 class="box-title">Cursos ({{ rows.length ? rows.length : 0 }})</h3>
 			<a href="/#!/courses/create" class="btn btn-primary btn-xs pull-right"><i class="ion ion-plus"></i> Cadastrar</a>
 		</div>
 		<div class="box-body">
