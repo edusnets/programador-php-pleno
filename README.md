@@ -64,4 +64,4 @@ $ cd backend
 $ ./vendor/bin/phpunit
 ```
 
-![Printscreen PHPUnit](https://kafee.com.br/biologiatotal_print_phpunit.png)
+![Printscreen PHPUnit](http://kafee.com.br/biologiatotal_print_phpunit.png)
