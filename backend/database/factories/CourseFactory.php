@@ -13,10 +13,12 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(\App\User::class, function (Faker $faker) {
+$factory->define(\App\Course::class, function (Faker $faker) {
+	$courseCategory = factory(\App\CourseCategory::class)->create();
+
 	return [
-		'name' 		=> $faker->name,
-		'email' 	=> $faker->unique()->safeEmail,
-		'birthdate' => rand(1960, 2010) . '-' . rand(1, 12) . '-' . rand(1, 25)
+		'title' 		=> $faker->title,
+		'description' 	=> $faker->realText(100),
+		'category_id' 	=> $courseCategory->id
 	];
 });

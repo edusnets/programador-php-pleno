@@ -23,7 +23,7 @@ class UserController extends Controller
 		return response()->json([
 			'success'   => true,
 			'response'  => null,
-			'data'      => $users->toArray() 
+			'data'      => $users->toArray()
 		], 200);
 	}
 
@@ -73,7 +73,7 @@ class UserController extends Controller
 			'success'	=> true,
 			'response'	=> 'O usuário foi cadastrado com sucesso.',
 			'data'		=> $user->toArray()
-		], 200);
+		], 201);
 	}
 
 	/**

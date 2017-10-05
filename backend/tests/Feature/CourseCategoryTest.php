@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserTest extends TestCase
+class CourseCategoryTest extends TestCase
 {
 	public $structure;
 
@@ -13,22 +13,21 @@ class UserTest extends TestCase
 		parent::setup();
 
 		$this->structure = [
-			'name',
-			'email',
-			'birthdate',
-			'created_at',
-			'updated_at'
+			'id',
+			'title',
+			'icon'
 		];
 	}
 
 	/* Assertions */
-	public function testIndexUserAssert(){
-		$user = factory(\App\User::class)->create();
-		$this->assertDatabaseHas('users', $user->toArray());
+	public function testIndexCourseCategoryAssert(){
+		$category = factory(\App\CourseCategory::class)->create();
+
+		$this->assertDatabaseHas('courses_categories', $category->toArray());
 
 		$response 	= $this->json(
 			'GET', 
-			'/api/user'
+			'/api/course_category'
 		);
 
 		$response->assertStatus(200)
@@ -42,13 +41,15 @@ class UserTest extends TestCase
 		]);
 	}
 
-	public function testCreateUserAssert(){
-		$user = factory(\App\User::class)->make();
+	public function testCreateCourseCategoryAssert(){
+		$category = factory(\App\CourseCategory::class)->create();
 
+		$this->assertDatabaseHas('courses_categories', $category->toArray());
+		
 		$response 	= $this->json(
 			'POST', 
-			'/api/user',
-			$user->toArray()
+			'/api/course_category',
+			$category->toArray()
 		);
 
 		$response->assertStatus(201)
@@ -62,12 +63,12 @@ class UserTest extends TestCase
 		]);
 	}
 
-	public function testShowUserAssert(){
-		$user = factory(\App\User::class)->create();
+	public function testShowCourseCategoryAssert(){
+		$category = factory(\App\CourseCategory::class)->create();
 
 		$response 	= $this->json(
 			'GET', 
-			'/api/user/' . $user->id
+			'/api/course_category/' . $category->id
 		);
 
 		$response->assertStatus(200)
@@ -78,24 +79,19 @@ class UserTest extends TestCase
 			'success',
 			'response',
 			'data' => [
-				'user' => $this->structure,
-				'registrations'
+				'courses',
+				'categories' => $this->structure
 			]
 		]);
 	}
 
-	public function testUpdateUserAssert(){
-		$user 	= factory(\App\User::class)->create();
-		$id 	= $user->id;
+	public function testUpdateCourseCategoryAssert(){
+		$category = factory(\App\CourseCategory::class)->create();
 
 		$response 	= $this->json(
 			'PUT', 
-			'/api/user/' . $id,
-			[
-				'name' 		=> 'Name Updated',
-				'email' 	=> 'email_updated@gmail.com',
-				'birthdate' => '2000-02-22'
-			]
+			'/api/course_category/' . $category->id,
+			$category->toArray()
 		);
 
 		$response->assertStatus(200)
@@ -109,13 +105,12 @@ class UserTest extends TestCase
 		]);
 	}
 
-	public function testDeleteUserAssert(){
-		$user 	= factory(\App\User::class)->create();
-		$id 	= $user->id;
+	public function testDeleteCourseCategoryAssert(){
+		$category = factory(\App\CourseCategory::class)->create();
 
 		$response 	= $this->json(
 			'DELETE', 
-			'/api/user/' . $id
+			'/api/course_category/' . $category->id
 		);
 
 		$response->assertStatus(200)
@@ -130,12 +125,12 @@ class UserTest extends TestCase
 	}
 
 	/* Fails */
-	public function testCreateUserFail(){
+	public function testCreateCourseCategoryFail(){
 		$response 	= $this->json(
 			'POST', 
-			'/api/user',
+			'/api/course_category',
 			[
-				'name' => 'Test'
+				'title' => null
 			]
 		);
 
@@ -150,10 +145,10 @@ class UserTest extends TestCase
 		]);
 	}
 
-	public function testShowUserFail(){
+	public function testShowCourseCategoryFail(){
 		$response 	= $this->json(
 			'GET', 
-			'/api/user/9999999'
+			'/api/course_category/9999999'
 		);
 
 		$response->assertStatus(422)
@@ -167,16 +162,14 @@ class UserTest extends TestCase
 		]);
 	}
 
-	public function testUpdateUserFail(){
-		$user 	= factory(\App\User::class)->create();
-		$id 	= $user->id;
+	public function testUpdateCourseCategoryFail(){
+		$category 	= factory(\App\CourseCategory::class)->create();
 
 		$response 	= $this->json(
 			'PUT', 
-			'/api/user/' . $id,
+			'/api/course_category/' . $category->id,
 			[
-				//'name' 		=> 'Name Updated',
-				'birthdate' => '2000-02-22'
+				'title' 		=> null,
 			]
 		);
 
@@ -191,10 +184,10 @@ class UserTest extends TestCase
 		]);
 	}
 
-	public function testDeleteUserFail(){
+	public function testDeleteCourseCategoryFail(){
 		$response 	= $this->json(
 			'DELETE', 
-			'/api/user/9999999'
+			'/api/course_category/9999999'
 		);
 
 		$response->assertStatus(422)

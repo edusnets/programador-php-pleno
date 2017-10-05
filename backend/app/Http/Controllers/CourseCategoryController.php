@@ -22,7 +22,7 @@ class CourseCategoryController extends Controller
 
 		return response()->json([
 			'success'   => true,
-			'message'   => null,
+			'response'   => null,
 			'data'      => $categories->toArray()
 		], 200);
 	}
@@ -63,7 +63,7 @@ class CourseCategoryController extends Controller
 			'success'   => true,
 			'response'  => 'A categoria do curso foi cadastrada com sucesso.',
 			'data'      => $category->toArray()
-		], 200);
+		], 201);
 	}
 
 	/**
@@ -87,7 +87,7 @@ class CourseCategoryController extends Controller
 
 		return response()->json([
 			'success'   => true,
-			'message'   => null,
+			'response'   => null,
 			'data'      => [
 				'courses' 		=> $categories->courses->toArray(),
 				'categories' 	=> $categories->toArray()

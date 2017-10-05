@@ -1,6 +1,4 @@
 <?php
-namespace Database\Seeder;
-
 use Illuminate\Database\Seeder;
 
 class CourseCategorySeeder extends Seeder

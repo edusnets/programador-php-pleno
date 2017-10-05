@@ -92,11 +92,11 @@ angular.module(
 		});
 
 		$scope.saveForm = function(){
-			$http.put(__env.apiUrl + 'course/' + id, $scope.course).then(function (resp) {
+			$http.put(__env.apiUrl + 'registration/' + id, $scope.registration).then(function (resp) {
 				ngNotify.set('O curso foi salvo com sucesso!', 'success');
 
 				setTimeout(function(){
-					location.href = "/#!/courses"
+					location.href = "/#!/registrations"
 				}, 500);
 			}, function (err) {
 				ngNotify.set(err.data.data.join(' | '), 'error');
@@ -104,12 +104,12 @@ angular.module(
 		}
 
 		$scope.deleteRegistration = function(){
-			$http.delete(__env.apiUrl + 'course/' + $scope.course.id).then(function (resp) {
+			$http.delete(__env.apiUrl + 'registration/' + $scope.registration.id).then(function (resp) {
 				ngNotify.set('O curso foi excluído com sucesso!', 'success');
 				angular.element('#DeleteModal').modal('hide');
 
 				setTimeout(function(){
-					location.href = "/#!/courses"
+					location.href = "/#!/registrations"
 				}, 500);
 			}, function (err) {
 				ngNotify.set(err.data.data.join(' | '), 'error');

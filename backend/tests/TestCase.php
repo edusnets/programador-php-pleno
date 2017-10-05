@@ -14,7 +14,6 @@ abstract class TestCase extends BaseTestCase
 		parent::setUp();
 
 		if(!static::$migrationsRun) {
-			/*
 			echo "\n => Criando arquivo .env de test\n";
 			Artisan::call('config:clear');
 			Artisan::call('config:cache');
@@ -28,7 +27,6 @@ abstract class TestCase extends BaseTestCase
 			Artisan::call('migrate');
 
 			static::$migrationsRun = true;
-			*/
 		}
 	}
 }

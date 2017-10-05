@@ -26,7 +26,7 @@ class RegistrationController extends Controller
 
 		return response()->json([
 			'success'   => true,
-			'message'   => null,
+			'response'   => null,
 			'data'      => $registrationReturn
 		], 200);
 
@@ -83,7 +83,7 @@ class RegistrationController extends Controller
 			'success'   => true,
 			'response'  => 'A matrícula foi efetuada com sucesso.',
 			'data'      => $this->createRegistrationObject($registration)
-		], 200);
+		], 201);
 	}
 
 	/**
@@ -107,32 +107,9 @@ class RegistrationController extends Controller
 
 		return response()->json([
 			'success'   => true,
-			'message'   => null,
+			'response'   => null,
 			'data'      => $this->createRegistrationObject($registration)
 		], 200);
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function update(Request $request, $id)
-	{
-		//
 	}
 
 	/**
@@ -144,6 +121,23 @@ class RegistrationController extends Controller
 	public function destroy($id)
 	{
 		//
+		$registration = Registration::find($id);
+
+		if(empty($registration)){
+			return response()->json([
+				'success'   => false,
+				'response'  => null,
+				'data'      => 'Matrícula não encontrada'
+			], 422);
+		}
+
+		$registration->delete();
+
+		return response()->json([
+			'success'   => true,
+			'response'  => null,
+			'data'      => 'Matrícula excluída com sucesso'
+		], 200);
 	}
 
 	public function createRegistrationObject($registration)

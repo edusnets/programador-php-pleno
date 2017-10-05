@@ -29,13 +29,15 @@ class CourseController extends Controller
 				'title' => $course->title,
 				'description' => $course->description,
 				'category_id' => $course->category_id,
-				'category_name' => isset($course->category) ? $course->category->title : null
+				'category_name' => isset($course->category) ? $course->category->title : null,
+				'created_at' => $course->created_at,
+				'updated_at' => $course->updated_at
 			];
 		}
 
 		return response()->json([
 			'success'   => true,
-			'message'   => null,
+			'response'  => null,
 			'data'      => [
 				'courses' 		=> $coursesReturn,
 				'categories' 	=> $categories->toArray()
@@ -86,7 +88,7 @@ class CourseController extends Controller
 			'success'   => true,
 			'response'  => 'O curso foi cadastrado com sucesso.',
 			'data'      => $course->toArray()
-		], 200);
+		], 201);
 	}
 
 	/**
@@ -111,7 +113,7 @@ class CourseController extends Controller
 
 		return response()->json([
 			'success'   => true,
-			'message'   => null,
+			'response'   => null,
 			'data'      => [
 				'course' 		=> $course->toArray(),
 				'categories' 	=> $categories->toArray(),
@@ -210,7 +212,7 @@ class CourseController extends Controller
 
 		return response()->json([
 			'success'   => true,
-			'message'   => null,
+			'response'   => null,
 			'data'      => $categories->toArray()
 		], 200);
 	}

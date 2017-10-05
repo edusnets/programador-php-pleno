@@ -13,10 +13,9 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(\App\User::class, function (Faker $faker) {
+$factory->define(\App\CourseCategory::class, function (Faker $faker) {
 	return [
-		'name' 		=> $faker->name,
-		'email' 	=> $faker->unique()->safeEmail,
-		'birthdate' => rand(1960, 2010) . '-' . rand(1, 12) . '-' . rand(1, 25)
+		'title' => $faker->title,
+		'icon' 	=> $faker->title
 	];
 });
