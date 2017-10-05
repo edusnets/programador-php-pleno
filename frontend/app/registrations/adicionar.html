@@ -14,7 +14,7 @@
 								<div class="form-group">
 									<label for="category">Aluno (*)</label>
 
-									<ui-select ng-model="registration.user_id">
+									<ui-select ng-model="registration.user.id">
 										<ui-select-match>
 											<span ng-bind="$select.selected.name"></span>
 										</ui-select-match>
@@ -23,14 +23,13 @@
 											<span ng-bind="user.name + ' <' + user.email + '>'"></span>
 										</ui-select-choices>
 									</ui-select>
-
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="category">Curso (*)</label>
 
-									<ui-select ng-model="registration.course_id">
+									<ui-select ng-model="registration.course.id">
 										<ui-select-match>
 											<span ng-bind="$select.selected.title"></span>
 										</ui-select-match>

@@ -145,6 +145,28 @@ class RegistrationsTest extends TestCase
 		]);
 	}
 
+	/*
+	public function testUpdateRegistrationFail(){
+		$response 	= $this->json(
+			'PUT', 
+			'/api/registration/',
+			[
+				'user' => null,
+			]
+		);
+
+		$response->assertStatus(422)
+		->assertJson([
+			'success' => false,
+		])
+		->assertJsonStructure([
+			'success',
+			'response',
+			'data'
+		]);
+	}
+	*/
+
 	public function testDeleteRegistrationFail(){
 		$response 	= $this->json(
 			'DELETE', 

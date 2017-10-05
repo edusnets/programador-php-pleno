@@ -84,15 +84,24 @@ angular.module(
 	function($http, $scope, Helpers, $routeParams, ngNotify) {
 		var id = parseInt($routeParams.id);
 
+		// get all users
+		$http.get(__env.apiUrl + 'user').then(function (resp) {
+			$scope.users = resp.data.data;
+		});
+		
+		// get all courses
+		$http.get(__env.apiUrl + 'course').then(function (resp) {
+			$scope.courses = resp.data.data.courses;
+		});
+
 		$http.get(__env.apiUrl + 'registration/' + id).then(function (resp) {
 			$scope.registration			= resp.data.data;
-			console.log($scope.registration);
 		}, function (err) {
 			ngNotify.set(err.data.data.join(' | '), 'error');
 		});
 
 		$scope.saveForm = function(){
-			$http.put(__env.apiUrl + 'registration/' + id, $scope.registration).then(function (resp) {
+			$http.put(__env.apiUrl + 'registration/' + $scope.registration.id, $scope.registration).then(function (resp) {
 				ngNotify.set('O curso foi salvo com sucesso!', 'success');
 
 				setTimeout(function(){

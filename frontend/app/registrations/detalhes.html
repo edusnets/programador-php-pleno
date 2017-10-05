@@ -12,31 +12,52 @@
 				</div>
 				<div class="box-body">
 					<form role="form">
-						<div class="box-body">
+						<div class="col-md-12">
 							<div class="form-group">
-								<label for="user">DATA E HORA DA MATRÍCULA</label><br/>
-								{{ registration.date }}
-							</div>
-							<hr/>
-							<div class="form-group">
-								<label for="user">NOME E E-MAIL DO ALUNO</label><br/>
-								{{ registration.user.name }} - <{{ registration.user.email }}>
-								<a ng-href="/#!/users/details/{{ registration.user.id }}" class="pull-right btn btn-primary btn-xs">Ver aluno</a>
-							</div>
-							<hr/>
-							<div class="form-group">
-								<label for="description">CURSO MATRICULADO</label><br>
-								{{ registration.course.title }} - ({{ registration.course.category.title }})
-								<a ng-href="/#!/courses/details/{{ registration.course.id }}" class="pull-right btn btn-primary btn-xs">Ver curso</a>
+							<label for="user">DATA E HORA DA MATRÍCULA</label><br/>
+							{{ registration.date }}
 							</div>
 						</div>
+						<div class="col-md-12"><hr/></div>
+						
+						<div class="col-md-6">
+							<div class="form-group">
+							<label for="user">NOME E E-MAIL DO ALUNO: </label> {{ registration.user.name }} - <{{ registration.user.email }}>
+							
+							<ui-select ng-model="registration.user">
+								<ui-select-match placeholder="Para alterar, selecione um usuário...">
+									<span ng-bind="$select.selected.name"></span>
+								</ui-select-match>
+								<ui-select-choices repeat="user in (users | filter: $select.search) track by user.id">
+									<span ng-bind="user.name + ' <' + user.email + '>'"></span>
+								</ui-select-choices>
+							</ui-select>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+							<label for="description">CURSO MATRICULADO: </label> {{ registration.course.title }} - ({{ registration.course.category.title }})
+
+							<ui-select ng-model="registration.course">
+								<ui-select-match>
+									<span ng-bind="$select.selected.title"></span>
+								</ui-select-match>
+								<ui-select-choices repeat="course in (courses | filter: $select.search) track by course.id">
+									<span ng-bind="course.title + ' (' + course.category_name + ')'"></span>
+								</ui-select-choices>
+							</ui-select>
+							</div>
+						</div>
+
 					</form>
+				</div>
+				<div class="box-footer">
+					<button type="submit" class="btn btn-primary pull-left" ng-click="saveForm()">Salvar Matrícula</button>
 				</div>
 			</div>
 		</div>
-
 	</div>
-
 </section>
 
 

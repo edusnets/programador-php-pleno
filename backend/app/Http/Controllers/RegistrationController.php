@@ -87,6 +87,60 @@ class RegistrationController extends Controller
 	}
 
 	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request, $id)
+	{
+		//
+		$rules = [
+			'user.id'		=> 'required|exists:users,id',
+			'course.id'		=> 'required|exists:courses,id'
+		];
+
+		$messages = [
+			'user.id.required' 		=> 'A identificação do aluno é obrigatória',
+			'user.id.exists'		=> 'Este aluno não existe',
+			'course.id.required' 	=> 'A identificação do curso é obrigatória',
+			'course.id.exists'		=> 'Este curso não existe',
+		];
+
+		$validator = Validator::make($request->all(), $rules, $messages);
+		
+		if($validator->fails()){
+			return response()->json([
+				'success'   => false,
+				'response'  => null,
+				'data'      => $validator->errors()->all()
+			], 422);
+		}
+
+		// search user in the same course
+		$search = Registration::where('user_id', '=', $request->input('user.id'))->where('course_id', '=', $request->input('course.id'))->first();
+		if(!empty($search)){
+			return response()->json([
+				'success'   => false,
+				'response'  => null,
+				'data'      => ['Este aluno já foi matrículado nesse curso.']
+			], 422);
+		}
+
+		$registration = Registration::find($id);
+		$registration->user_id		= $request->input('user.id');
+		$registration->course_id	= $request->input('course.id');
+		$registration->save();
+
+		return response()->json([
+			'success'   => true,
+			'response'  => 'A matrícula atualizada com sucesso.',
+			'data'      => $this->createRegistrationObject($registration)
+		], 200);
+	}
+
+	/**
 	 * Display the specified resource.
 	 *
 	 * @param  int  $id
