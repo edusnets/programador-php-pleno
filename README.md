@@ -4,7 +4,11 @@ As tabelas do banco serão construídas por migrations e apenas a tabela de cate
 Por se tratar de uma API, a aplicação conta com um módulo para controle de CORS, atualmente está com tudo liberado.
 
 As tabelas estão com relacionamento por chave estrangeira, porém, as ações de cascata eu deixei na inteligência do código ao invés do MySQL, preferência pessoal só.
-A aplicação foi desenvolvida em Ubuntu 16, com PHP7, MySQL e Apache. Caso o ambiente seja ngynx não haverá modificação, porém, se for Lighttpd, o angular vai precisar de modificações por causa de urls.
+
+A aplicação foi desenvolvida em Ubuntu 16, com PHP7, MySQL e Apache.
+Para rodar o Angular é necessário ter o NodeJs instalado. 
+Caso o ambiente seja ngynx não haverá modificação, porém, se for Lighttpd, o angular vai precisar de modificações por causa de urls.
+
 O Laravel tem algumas exigências de módulos para o PHP (https://laravel.com/docs/5.4/#server-requirements)
 
 O Frontend, foi desenvolvido com Angular 1.6 e com os pacotes e dependências gerenciados pelo Bower.
